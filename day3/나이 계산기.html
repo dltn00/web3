@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나이 계산기</title>
+</head>
+<body>
+    <!-- prompt로 입력을 받아서
+    내용을 그대로 다시 알림창에 띄워주세요! -->
+        
+    
+    <script>
+    const 메모 = Number(prompt('출생년도를 입력해주세요.'))
+    
+    const 현재년도 = new Date().getFullYear()
+    
+    alert("당신의 나이는" + (현재년도 - 메모 + 1) +"살 입니다.")
+
+    // alert(현재년도 - 출생년도 + 1)
+    // Number(메모) 숫자로 입력
+
+    </script>
+</body>
+</html>

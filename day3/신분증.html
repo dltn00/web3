@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const birthYear = Number(prompt('출생년도를 입력해주세요'));
+        let toDayYear = new Date().getFullYear();
+        let userAge = (toDayYear - birthYear + 1);
+
+        // 조건 ? 참일때 : 거짓일떄
+        userAge >= 20 ? alert(`성인 이므로 판매 가능`) : alert(`미성년자 이므로 판매 불가 `);
+    </script>
+</body>
+</html>
