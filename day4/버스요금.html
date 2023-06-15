@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>버스요금</title>
+</head>
+<body>
+
+    <script>
+        
+        const userAge = Number(prompt(`나이를 입력해주세요`));
+        let cost
+        let category 
+
+        if(userAge >= 20){
+            category = `성인`;
+            cost = 1250;
+        }else if(userAge >= 14){
+            category = `청소년`;
+            cost = 870;
+        }else if(userAge >=7){
+            category = `어린이`;
+            cost = 500;
+        }else{ 
+            category = `유아`;
+            cost = 0;
+        }
+
+        alert(`${category} 요금은 ${cost}원 입니다`)
+        
+
+    </script>
+</body>
+</html>

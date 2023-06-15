@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        const pitch = Number(prompt(`복숭아 개수를 입력해주세요.`));
+        let box = math.floor(pitch / 10);
+
+        if(pitch % 10 !== 0){
+            box++;
+        }
+        
+        alert (`바구니 개수는 ${box}개 입니다`);
+    </script>
+</body>
+</html>
