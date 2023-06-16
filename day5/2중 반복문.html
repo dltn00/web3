@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            display: flex;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            border: 1px solid black;
+            display: flex;
+            margin: 0 auto;
+            margin-top: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+
+    <script>
+            
+            for(let i = 0 ; i < 5 ; i++){
+              document.write(`<div class = "container">`);
+            for(let b =1; b <=5 ; b++){
+                document.write(`<div class = "box">div</div>`);
+                
+            }
+            document.write('</div>');  
+            }
+            
+            
+    </script>
+</body>
+</html>

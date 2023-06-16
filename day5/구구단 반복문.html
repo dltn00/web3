@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 120px;
+            border: 1px solid #232323;
+            border-radius: 10px;
+            background-color: aquamarine;   
+            text-align: center; 
+        }   
+    </style>
+</head>
+<body>
+    
+    <script>
+        const dan = Number(prompt(`단을 입력해주세요`));
+        
+        document.write(`<div class = "container">`);
+        for (let b = 1; b <= 9 ; b++) {
+
+            document.write(`${dan} x ${b} = ${dan * b}`);
+            document.write(`<br>`);
+
+        }
+    </script>
+</body>
+</html>
