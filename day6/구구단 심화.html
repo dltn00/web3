@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단심화</title>
+    <style>
+
+        .gogodan{
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .dan{
+            border: 1px solid black;
+            width: 112px;
+            padding-left: 16px;
+            padding-top: 16px;
+            background-color: rgb(73, 73, 73);
+            color: white;
+            line-height: 4px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <script>
+            document.write(`<div class = gogodan>`)
+            for(let j = 1 ; j <=9 ; j++){
+                document.write(`<div class = "dan"><h3>${j}단</h3>`) 
+                document.write(`<br>`)
+
+            for(let i = 1 ; i <=9 ; i++){
+            document.write(`<p>${j} x ${i} = ${j*i}</p>`)
+            document.write(`<br>`)
+                }document.write(`</div>`)
+            }document.write(`</div>`)
+            
+    </script>
+</body>
+</html>
