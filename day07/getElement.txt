@@ -26,4 +26,10 @@ document.getElementsByTagName('tag')
 
 ----------------------------------------------------------------------------
 
-quertSelector와 getElementBy의 차이점?   
+quertSelector와 getElementBy의 차이점?  
+
+const 핸드폰 = 쿼리셀렉터('핸드폰')
+const 핸드폰 = 겟엘리먼츠아이디('핸드폰')
+
+
+const 실시간컨텐츠 =document.getElementsByClassName

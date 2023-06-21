@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id = '가위버튼'>가위</button>
+    <button id = '바위버튼'>바위</button>
+    <button id = '보버튼'>보</button>
+
+    <script>
+        const 가위내기 = document.getElementById('가위버튼');
+        const 바위내기 = document.getElementById('바위버튼');
+        const 보내기 = document.getElementById('보버튼');
+        
+        console.log(가위내기);
+        가위내기.addEventListener('onclick', 가위);
+        바위내기.addEventListener('onclick', 바위);
+        보내기.addEventListener(`onclick`, 보);
+        
+        function 가위바위보() {
+            alert(Math.floor(Math.random()*2+1));
+            
+        }
+    </script>
+</body>
+</html>
