@@ -73,8 +73,22 @@
             }
         })
 
-
-        
+        function 가위바위보() {
+            function 컴퓨터차례();
+            if(computer === 유저선택){
+                alert(`무승부`);
+            }else if((computer === 1 && 유저선택 === 0) || (computer === 2 && 유저선택 === 1) || (computer === 1 && 유저선택 === 0) );
+        }
+        function 컴퓨터차례() {
+            computer = Math.floor(Math.random()*3);
+            if (computer === 0){
+                alert(`컴퓨터 : 가위`);
+            }else if(computer === 1){
+                alert(`컴퓨터 : 바위`);
+            }else {
+                alert(`컴퓨터 : 보`);
+            }
+        }
     </script>
 </body>
 </html>
