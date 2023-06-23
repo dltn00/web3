@@ -46,9 +46,6 @@
             background-position: -152px;
         }
 
-        .결과 {
-            background-position: -66px;
-        }
 
     </style>
 </head>
@@ -65,9 +62,10 @@
         </div>
         <div class="computer-container">
             <p>컴퓨터의 선택은!</p>
-            <button class="결과" ></button>
+            <button id="결과"></button>
         </div>
         <p id="result">결과</p>
+        <p id="win-count">총승리 :: 회, 연승 회</p>
     </div>
 
     <script>
@@ -77,8 +75,11 @@
         const 바위버튼 = document.getElementById("바위버튼");
         const 보버튼 = document.getElementById("보버튼");
         const 결과 = document.getElementByid("결과");
+        const 승리표시 = document.getElementById("win-count");
 
         let comupter;
+        let totalwin;
+        let 연승;
 
 
         // 버튼을 누르면 어떤 일이 벌어져야하는가?
@@ -97,39 +98,35 @@
         function 가위바위보(유저의선택) {
             컴퓨터의차례();
             if (comupter === 유저의선택) {
-                alert('무승부')
+                결과.innertext = `무승부`;
             } else if ((comupter === 1 && 유저의선택 === 0) || (comupter === 2 && 유저의선택 === 1) || (comupter === 0 && 유저의선택 === 2)) {
-                alert('패배')
+                결과.innertext = `패배`;
+                연승 = 0;
             } else {
-                alert('승리')
+                결과.innertext = `승리`;
+                totalwin++;
+                연승++;
             }
 
             function 컴퓨터의차례() {
                 comupter = Math.floor(Math.random() * 3);
+                버튼초기화()
                 if (comupter === 0) {
-                    alert("컴 : 가위");
+                    컴퓨터버튼.classlist.add(`가위버튼`);
                 } else if (comupter === 1) {
-                    alert("컴 : 바위");
+                    컴퓨터버튼.classlist.add(`바위버튼`);
                 } else {
-                    alert("컴 : 보");
+                    컴퓨터버튼.classlist.add(`보버튼`);
                 }
 
             }
         }
-            function 결과() {
-                computer = Math.floor(Math.random()*3);
-                if(comupter === 0 ){
-                    가위버튼();
-                }else if(comupter === 1) {
-                    바위버튼();
-                }else {
-                    보버튼();
-                }
+            function 버튼초기화() {
+                
+                컴퓨터버튼.classlist.remove(`가위버튼`);
+                컴퓨터버튼.classlist.remove(`바위버튼`);
+                컴퓨터버튼.classlist.remove(`보버튼`);
             }
-
-
-
-
 
     </script>
 </body>
