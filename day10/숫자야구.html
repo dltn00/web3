@@ -6,25 +6,201 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="wrapper">
+        <div class="game-board">
+            <div class="round">
+                <div class="status">
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                </div>
+                <div class="number-container">
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                </div>
+            </div>
+        </div>
+        <div class="game-board">
+            <div class="round">
+                <div class="status">
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                </div>
+                <div class="number-container">
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                </div>
+            </div>
+        </div>
+        <div class="game-board">
+            <div class="round">
+                <div class="status">
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                </div>
+                <div class="number-container">
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                </div>
+            </div>
+        </div>
+        <div class="game-board">
+            <div class="round">
+                <div class="status">
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                </div>
+                <div class="number-container">
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                </div>
+            </div>
+        </div>
+        <div class="game-board">
+            <div class="round">
+                <div class="status">
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                </div>
+                <div class="number-container">
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                </div>
+            </div>
+        </div>
+        <div class="game-board">
+            <div class="round">
+                <div class="status">
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                </div>
+                <div class="number-container">
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                </div>
+            </div>
+        </div>
+        <div class="game-board">
+            <div class="round">
+                <div class="status">
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                </div>
+                <div class="number-container">
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                </div>
+            </div>
+        </div>
+        <div class="game-board">
+            <div class="round">
+                <div class="status">
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                    <div class="status-light"></div>
+                </div>
+                <div class="number-container">
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                    <div class="number-place"></div>
+                </div>
+            </div>
+        </div>        
     
+    </div>
     <script>
-
         const 정답 = [];
- (Math.floor(Math.random()*10))
+        
         for(let i = 0 ; i < 4 ; i++){
-
-                    let 이번회차랜덤수;
+            let 난수;
                  
-            };
-                
+            while (true){
+                난수 = Math.floor(Math.random() * 10);
+                if (정답.indexOf(난수) === -1) {
+                    break;
+                }
+            }
+            정답.push(난수);  
+        }
 
-            console.log(정답);  
+        for(let i = 0; i < 10; i++){
+            const 적중 = 게임();
+            console.log(`${i+1}번째 시도입니다`)
             
+            if(적중 === 4){
+                console.log(`정답 입니다`);
+                break;
+            } else if(i === 9) {
+                console.log(`패배하셨습니다`);
+                console.log(`정답은 ${정답} 이였습니다`)
+            }
+        }
             
         
+        
+        
+        function 게임() {
+
+            let UserInput = [];
+            let 스트라이크 = 0;
+            let 볼 = 0;
+
+            for(let i = 0; i < 4; i++){
+            UserInput.push(Number(prompt('숫자를 입력하세요')));
+        }
+        console.log(UserInput);
+        
+        for(let i =0; i < 4; i++){
+            if(정답[i] === UserInput[i]){
+                스트라이크++;
+            }
+            for(let j = 0; j < 4 ; j++){
+                if(i !== j && UserInput[i] === 정답[j]){
+                    볼++
+                }
+            }   
+        }
+            console.log(`스트라이크 : ${스트라이크}, 볼 : ${볼}`);
+            console.log(UserInput);
+
+            return 스트라이크;
+    }
         
 
-        
+
+
+        // UserInput.pop() 배열 뒤에 요소를 꺼내쓴다(배열에서는 지워진다)
+        // UserInput.shift() 배열 앞에 요소를 꺼내쓴다(배열에서는 지워진다)
+        // UserInput.splice() (몇번째거부터, 몇개를 지울껀가?)
     </script>
 </body>
 </html>
