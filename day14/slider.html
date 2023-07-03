@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +47,26 @@
             flex-shrink: 0;
         }
 
+        .dot-buttons {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 16px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: gray;
+        }
+
+        .dot.active {
+            background-color: pink;
+        }
+
         .buttons {
             position: absolute;
             top: 0;
@@ -53,7 +74,7 @@
             height: 100%;
         }
 
-        .slideprev {
+        .slide-prev {
             position: absolute;
             top: 50%;
             left: 0;
@@ -69,121 +90,181 @@
         }
     </style>
 </head>
+
 <body>
+
     <section id="test">
+
         <div class="slider">
-             <div class="content">
-                 1
-            </div>
-             <div class="content">
-                 2
-            </div>
-            <div class="content">
-                 3
-            </div>
-            <div class="content">
-                4
-            </div>
+            <div class="content">1</div>
+            <div class="content">2</div>
+            <div class="content">3</div>
+            <div class="content">4</div>
         </div>
+
+        <!-- <div class="slider">
+            <div class="slider-view">
+                <div class="contents-wrapper">
+                    <div class="content">
+                        1
+                    </div>
+                    <div class="content">
+                        2
+                    </div>
+                    <div class="content">
+                        3
+                    </div>
+                    <div class="content">
+                        4
+                    </div>
+                </div>
+            </div>
+            <div class="dot-buttons">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="buttons">
+                <button class="slide-prev">
+                    이전
+                </button>
+                <button class="slide-next">
+                    다음
+                </button>
+            </div>
+        </div> -->
     </section>
-    <!-- <div class="slider">
-        <div class="slider-view">
-            <div class="contents-wrapper">
-                <div class="content">
-                    1
-                </div>
-                <div class="content">
-                    2
-                </div>
-                <div class="content">
-                    3
-                </div>
-                <div class="content">
-                    4
-                </div>
-            </div>
-        </div>
-        <div class="buttons">
-            <button class="slide-prev">
-                이전
-            </button>
-            <button class="slide-next">
-                다음
-            </button>
-        </div>
-    </div> -->
-    
-
     <script>
+        //1. 쿼리셀렉터
+        //2. 겟엘리먼츠바이클래스네임
 
-        function makenode(tagName, className) {
+
+
+
+
+        const slider = document.querySelector('.slider');
+        const viewContentsCount = 1;
+        const slideSpeed = 500;
+        let index = 0 + viewContentsCount;
+
+        const contents = [];
+
+        for (let i = 0; i < slider.childElementCount; i++) {
+            contents[i] = slider.children[i];
+        }
+        // const sliderView = makeNode('div', 'slider-view');
+        const sliderView = document.createElement('div');
+        sliderView.classList.add('slider-view');
+
+        const contentsWrapper = makeNode('div', 'contents-wrapper');
+        const buttons = makeNode('div', 'buttons');
+        const slidePrev = makeNode('button', 'slide-prev');
+        const slideNext = makeNode('button', 'slide-next');
+        slidePrev.addEventListener('click', () => {
+            index--;
+            위치적용(500);
+            if (index === 0) {
+                setTimeout(() => {
+                    index = 4;
+                    위치적용(0);
+                }, 500);
+            }
+        })
+
+        slideNext.addEventListener('click', () => {
+            index++;
+            위치적용(500);
+            if (index ===5 ) {
+                setTimeout(() => {
+                    index = 1 ;
+                    위치적용(0)
+                }, 500);
+            }
+        })
+
+        slider.appendChild(sliderView);
+        sliderView.appendChild(contentsWrapper);
+
+        for (let i = 0; i < contents.length; i++) {
+            contentsWrapper.appendChild(contents[i]);
+        }
+
+        slider.appendChild(buttons);
+        buttons.appendChild(slidePrev);
+        buttons.appendChild(slideNext);
+        slidePrev.innerText = "이전";
+        slideNext.innerText = "다음";
+
+        const dotButtons = makeNode('div', 'dot-buttons');
+
+        //닷 버튼들 추가하기.
+        for (let i = 0; i < contents.length; i++) {
+            //4번 만들어서 각각 넣어야하기때문에 const dot 선언은 반복문 내부에서 해야한다.
+            const dot = makeNode('div', 'dot');
+            dotButtons.appendChild(dot);
+
+            dot.addEventListener('click', () => {
+                index = i;
+                위치적용();
+            })
+        }
+        slider.appendChild(dotButtons);
+        const sliderWidth = slider.clientWidth;
+        const sliderHeight = slider.clientHeight;
+
+        console.log(sliderWidth, sliderHeight)
+
+        for (let i = 0; i < contentsWrapper.childElementCount; i++) {
+            contentsWrapper.children[i].style.width = `${sliderWidth}px`
+            contentsWrapper.children[i].style.height = `${sliderHeight}px`
+        }
+
+        const cloneFirst = contents[0].cloneNode(true);
+        const cloneLast = contents[contents.length-1].cloneNode(true);
+
+        contentsWrapper.appendChild(cloneFirst);
+        contentsWrapper.insertBefore(cloneLast,contentsWrapper.firstElementChild);
+        
+        위치적용();
+
+        
+
+       
+
+        function makeNode(tagName, className) {
             const node = document.createElement(tagName);
             node.classList.add(className);
 
             return node;
         }
 
-        const slider = document.querySelector('.slider');
-        const cotents = []
-
-        const slideView = document.createElement('div');
-        slideView.classList.add('slideview');
-
-        const contentsWrapper = makenode('div', 'contentsWrapper');
-        const buttons = makenode('div', 'button');
-        const slidePrev = makenode('div', 'slidePrev');
-        const slideNext = makenode('div', 'slideNext');
-
-        for(let i = 0 ; i < slider.childElementCount; i++) {
-            contents[i] = slider.children[i];
+        function 위치적용(time) {
+            // for (let i = 0; i < dotButtons.childElementCount; i++) {
+            //     dotButtons.children[i].classList.remove('active');
+            // }
+            // dotButtons.children[index-viewContentsCount].classList.add('active');
+            contentsWrapper.style.transform = `translateX(-${index * sliderWidth}px)`
+            contentsWrapper.style.transition = `${time}ms`;
+            console.log(time);
         }
-        console.log(contents);
-
-        slider.appendChild(slideView);
-        slideView.appendChild(contentsWrapper);
-
-        for(let i = 0 ; i < contents.length; i++) {
-            contentsWrapper.appendChild(contents[i]);
-        }
-        
-        slider.appendChild(buttons);
-        buttons.appendChild(slidePrev);
-        buttons.appendChild(slideNext);
-        slidePrev.innertext = "이전";
-        slideNext.innertext = "다음";
-
-        // const sliderWidth = slider.clientWidth;
-        // const sliderHeight = slider.clientHeight;
-
-        // console.log(sliderWidth, sliderHeight);
-
-        // let index = 0;
 
 
-    //     const ul = document.querySelector('.contents-wrapper');
-    //     const prevButton = document.getElementById('prev');
-    //     const nextButton = document.getElementById('next');
 
-        
 
-    //     for (let i = 0; i < ul.childElementCount; i++) {
-    //         ul.children[i].style.width = `${sliderWidth}px`
-    //         ul.children[i].style.height = `${sliderHeight}px`
-    //     }
+        //------------------------------------------------------------------------ 
 
-    //     prevButton.addEventListener('click', () => {
-    //         index--;
-    //         위치적용();
-    //     })
 
-    //     nextButton.addEventListener('click', () => {
-    //         index++;
-    //         위치적용();
-    //     })
 
-    //     function 위치적용() {
-    //         ul.style.transform = `translateX(-${index * sliderWidth}px)`
-    //     }
-    // </script>
+       
+
+        //1. 클래스로 가져오면 배열에 담겨있는걸 잊으면 안됩니다
+        //2. li가 아닌 ul을 움직여야합니다.
+        //   li를 움직일수도 있지만 반목문을 써야하고, 비효율적입니다.
+        //3. translateX(-200px) 이라는 값은 문자열 안에 들어가야 합니다.
+        //4. 슬라이드가 1 -> 2 -> 3 -> 4 로 움직이려면 변수가 하나 필요할수도?
+
+    </script>
 </body>
+
 </html>
