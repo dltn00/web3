@@ -100,6 +100,8 @@
             <div class="content">2</div>
             <div class="content">3</div>
             <div class="content">4</div>
+            <div class="content">5</div>
+            <div class="content">6</div>
         </div>
 
         <!-- <div class="slider">
@@ -144,9 +146,11 @@
 
 
         const slider = document.querySelector('.slider');
-        const viewContentsCount = 1;
+        const viewContentsCount = 2;
         const slideSpeed = 500;
         let index = 0 + viewContentsCount;
+        let moveCheck = true;
+        const gap = viewContentsCount===1 ? 0 : 8;
 
         const contents = [];
 
@@ -162,25 +166,32 @@
         const slidePrev = makeNode('button', 'slide-prev');
         const slideNext = makeNode('button', 'slide-next');
         slidePrev.addEventListener('click', () => {
-            index--;
-            위치적용(500);
-            if (index === 0) {
+            if(moveCheck) {
+                moveCheck = false;
+                index--;
+                위치적용(slideSpeed);
                 setTimeout(() => {
-                    index = 4;
-                    위치적용(0);
-                }, 500);
+                    if (index < viewContentsCount) {
+                            index = 4;
+                            위치적용(0);
+                        }
+                        moveCheck = true;
+                }, slideSpeed);
             }
+
         })
 
         slideNext.addEventListener('click', () => {
+            moveCheck = false;
             index++;
-            위치적용(500);
-            if (index ===5 ) {
-                setTimeout(() => {
-                    index = 1 ;
-                    위치적용(0)
-                }, 500);
-            }
+            위치적용(slideSpeed);
+            setTimeout(() => {
+            if (index > contents.length + viewContentsCount -1 ) {
+                    index = viewContentsCount ;
+                    위치적용(0);
+                }
+                moveCheck = true;
+            }, slideSpeed);
         })
 
         slider.appendChild(sliderView);
@@ -205,8 +216,8 @@
             dotButtons.appendChild(dot);
 
             dot.addEventListener('click', () => {
-                index = i;
-                위치적용();
+                index = i + viewContentsCount;
+                위치적용(slideSpeed);
             })
         }
         slider.appendChild(dotButtons);
@@ -216,15 +227,18 @@
         console.log(sliderWidth, sliderHeight)
 
         for (let i = 0; i < contentsWrapper.childElementCount; i++) {
-            contentsWrapper.children[i].style.width = `${sliderWidth}px`
+            contentsWrapper.children[i].style.width = `${sliderWidth/viewContentsCount}px`
             contentsWrapper.children[i].style.height = `${sliderHeight}px`
         }
-
-        const cloneFirst = contents[0].cloneNode(true);
-        const cloneLast = contents[contents.length-1].cloneNode(true);
-
-        contentsWrapper.appendChild(cloneFirst);
-        contentsWrapper.insertBefore(cloneLast,contentsWrapper.firstElementChild);
+        for(let i = contents.length-1; i > contents.length-1 -viewContentsCount; i--) {
+            const cloneback = contents[i].cloneNode(true);
+            contentsWrapper.insertBefore(cloneback,contentsWrapper.firstElementChild); 
+        }
+        
+        for(let i = 0; i <viewContentsCount ; i++) {
+           const clonePront = contents[i].cloneNode(true); 
+           contentsWrapper.appendChild(clonepront);
+        }
         
         위치적용();
 
@@ -240,11 +254,21 @@
         }
 
         function 위치적용(time) {
-            // for (let i = 0; i < dotButtons.childElementCount; i++) {
-            //     dotButtons.children[i].classList.remove('active');
-            // }
-            // dotButtons.children[index-viewContentsCount].classList.add('active');
-            contentsWrapper.style.transform = `translateX(-${index * sliderWidth}px)`
+            for (let i = 0; i < dotButtons.childElementCount; i++) {
+                dotButtons.children[i].classList.remove('active');
+            }
+            if(index < viewContentsCount ) {
+                dotButtons.lastElementChild.classList.add('active');
+
+                  }
+                  else if (index > contents.length+viewContentsCount-1){
+                    dotButtons.firstElementChild.classList.add('active');
+                  }
+                  else {
+                      dotButtons.children[index-viewContentsCount].classList.add('active');
+                }
+            
+            contentsWrapper.style.transform = `translateX(-${index * sliderWidth/viewContentsCount}px)`
             contentsWrapper.style.transition = `${time}ms`;
             console.log(time);
         }
