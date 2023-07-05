@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .place{
+            width: 50%;
+            height: 50vh;
+            margin: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="place"></div>
+
+    <script>
+        const place = document.querySelector(".place");
+        let 클릭X,클릭Y;
+        
+
+        place.addEventListener('mousedown', (e)=>{
+            클릭X = e.clientX;
+            클릭Y = e.clientY;
+            console.log(클릭X,클릭Y)
+        })
+        let 이동거리X,이동거리Y;
+        place.addEventListener('mouseup',(e)=>{
+            const 현재X = e.clientX;
+            const 현재Y = e.clientY;
+            console.log(현재X-클릭X,현재Y-클릭Y);
+        })
+    </script>
+</body>
+</html>
